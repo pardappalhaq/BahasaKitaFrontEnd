@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BahasaKita adalah Platform belajar bahasa isyarat Indonesia untuk siswa tunarungu.">
+  <title>BahasaKita</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reference.css">
+  <link rel="stylesheet" href="css/astro.css">
+  <script>
+    // Theme detection
+    (function() {
+      try {
+        var saved = localStorage.getItem('bahasakita-theme');
+        if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        var size = localStorage.getItem('bahasakita-textSize');
+        if (size) document.documentElement.setAttribute('data-size', size);
+        var comfort = localStorage.getItem('bahasakita-comfortable');
+        if (comfort === 'true') document.documentElement.setAttribute('data-comfort', 'true');
+        var contrast = localStorage.getItem('bahasakita-contrast');
+        if (contrast === 'true') document.documentElement.setAttribute('data-contrast', 'true');
+      } catch(e) {}
+    })();
+  </script>
+</head>
+<body>
+  <!-- ==================== SPLASH SCREEN ==================== -->
+  <main id="splash-screen" class="entry-splash" aria-label="Layar pembuka BahasaKita">
+    <div class="splash-halo halo-one"></div>
+    <div class="splash-halo halo-two"></div>
+    <div class="splash-center">
+      <div class="splash-logo">
+        <div class="splash-logo-text">BahasaKita</div>
+      </div>
+      <p class="splash-tagline">Belajar dengan caramu. Bertumbuh bersama.</p>
+      <div class="splash-loading" role="status" aria-label="Menyiapkan beranda">
+        <i></i><i></i><i></i>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== AUTH PAGES ==================== -->
+  <div id="auth-page" class="auth-backdrop soft-login-backdrop" style="display:none">
+    <a class="auth-brand" href="#" onclick="showPage('login');return false"><span class="brand-symbol"></span><span>BahasaKita<small>Ruang untuk bertumbuh</small></span></a>
+    <section class="auth-story" aria-labelledby="auth-story-title">
+      <p class="home-eyebrow">BELAJAR. BEREKSPRESI. BERTUMBUH.</p>
+      <h2 id="auth-story-title">Duniamu,<br><em>tanpa batas.</em></h2>
+      <p>Setiap isyarat membuka cerita baru. Temukan cara belajarmu, selangkah demi selangkah.</p>
+      <div class="auth-story-photo"><img src="images/belajar-bersama.jpg" alt="Sekelompok pelajar menikmati waktu belajar bersama" width="1600" height="1067"><span class="photo-note"> &nbsp; Berbeda cara, bersama bertumbuh.</span></div>
+      <div class="auth-story-details"><span>Bahasa isyarat Indonesia</span><span>SD · SMP · SMA</span><span>Belajar sesuai ritmemu</span></div>
+    </section>
+    <!-- Login -->
+    <div id="login-page" class="auth-shell auth-frame auth-login-page" style="display:none">
+      <main class="auth-content">
+        <div class="login-center">
+          <section class="login-reference-card login-soft-card" aria-labelledby="login-heading">
+            <div class="splash-logo-text login-card-logo">BahasaKita</div>
+            <h1 id="login-heading" tabindex="-1">Selamat datang kembali</h1>
+            <p class="login-card-description">Masukkan email dan kata sandi untuk melanjutkan.</p>
+            <form id="login-form">
+              <label class="soft-login-field">
+                <span>Email</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <input type="email" id="login-email" placeholder="Alamat email" required maxlength="254" autocomplete="username">
+                </div>
+              </label>
+              <label class="soft-login-field">
+                <span>Kata sandi</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <input type="password" id="login-password" placeholder="Masukkan kata sandi" required maxlength="128" autocomplete="current-password">
+                  <button type="button" class="password-toggle" aria-label="Tampilkan kata sandi" onclick="togglePassword(this)"></button>
+                </div>
+              </label>
+              <div class="login-help-row">
+                <label class="login-remember"><input type="checkbox" id="login-remember"><span>Ingat email saya</span></label>
+                <a href="#" onclick="document.getElementById('login-error').textContent='Ini versi demo lokal. Gunakan tombol Coba versi demo untuk menjelajahi aplikasi.';document.getElementById('login-error').style.display='';return false">Lupa kata sandi?</a>
+              </div>
+              <p class="login-error" id="login-error" role="alert" style="display:none"></p>
+              <button class="btn login-rounded-submit" type="submit">Masuk dan mulai belajar</button>
+            </form>
+            <div class="login-line-divider"><span>ATAU</span></div>
+            <div class="social-login-options">
+              <button type="button" onclick="demoLogin()">Coba versi demo <span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="login-signup-bottom">
+              <span>Belum punya profil?</span>
+              <a href="#" class="login-register-link" onclick="showPage('register');return false">Register</a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Register -->
+    <div id="register-page" class="auth-shell auth-frame auth-login-page soft-register-page" style="display:none">
+      <main class="auth-content">
+        <div class="login-center">
+          <section class="login-reference-card login-soft-card register-soft-card" aria-labelledby="register-heading">
+            <div class="splash-logo-text login-card-logo">BahasaKita</div>
+            <h1 id="register-heading" tabindex="-1">Mari kenalan dulu</h1>
+            <p class="login-card-description">Pilih peran akunmu. Siswa belajar mandiri, guru dan orang tua mendampingi.</p>
+            <form id="register-form">
+              <label class="soft-login-field">
+                <span>Nama panggilan</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <input type="text" id="reg-name" placeholder="Nama panggilanmu" required maxlength="30" autocomplete="nickname">
+                </div>
+              </label>
+              <label class="soft-login-field">
+                <span>Email</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <input type="email" id="reg-email" placeholder="Alamat email" required maxlength="254" autocomplete="username">
+                </div>
+              </label>
+              <label class="soft-login-field">
+                <span>Kata sandi</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <input type="password" id="reg-password" placeholder="Minimal 8 karakter" required minlength="8" maxlength="128" autocomplete="new-password">
+                  <button type="button" class="password-toggle" aria-label="Tampilkan kata sandi" onclick="togglePassword(this)"></button>
+                </div>
+              </label>
+              <label class="soft-login-field">
+                <span>Konfirmasi kata sandi</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <input type="password" id="reg-confirm" placeholder="Ulangi kata sandi" required minlength="8" maxlength="128" autocomplete="new-password">
+                </div>
+              </label>
+              <label class="soft-login-field">
+                <span>Daftar sebagai</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <select id="reg-role">
+                    <option value="student">Siswa</option>
+                    <option value="teacher">Guru</option>
+                    <option value="parent">Orang tua</option>
+                  </select>
+                </div>
+              </label>
+              <label class="soft-login-field" id="reg-grade-field">
+                <span>Jenjang belajar</span>
+                <div class="soft-input-wrap">
+                  <span class="field-icon"></span>
+                  <select id="reg-grade" required>
+                    <option value="SD">SD</option>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                  </select>
+                </div>
+              </label>
+              <p class="login-error" id="register-error" role="alert" style="display:none"></p>
+              <button class="btn login-rounded-submit" type="submit">Register</button>
+            </form>
+            <div class="login-line-divider"><span>ATAU</span></div>
+            <div class="social-login-options">
+              <button type="button" onclick="demoLogin()">Coba versi demo <span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="login-signup-bottom">
+              <span>Sudah punya profil?</span>
+              <a href="#" class="login-register-link" onclick="showPage('login');return false">Login</a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APP SHELL ==================== -->
+  <div id="app-shell" class="app-shell" style="display:none">
+    <a class="skip-link" href="#main">Langsung ke isi</a>
+
+    <!-- Sidebar -->
+    <aside id="primary-sidebar" class="sidebar" aria-label="Menu utama">
+      <a class="brand" href="#" onclick="navigate('home');return false" aria-label="BahasaKita, beranda">
+        <span class="brand-symbol"></span><span class="brand-logo-text">BahasaKita<small>Ruang untuk bertumbuh</small></span>
+      </a>
+      <span class="side-label">RUANG BELAJARMU</span>
+      <nav id="sidebar-nav" aria-label="Navigasi utama">
+        <!-- Generated by JS -->
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-profile" id="sidebar-profile">
+          <!-- Generated by JS -->
+        </div>
+        <div class="side-footer">BahasaKita · Ruang untuk bertumbuh</div>
+      </div>
+    </aside>
+
+    <!-- Main body -->
+    <div class="app-body">
+      <!-- Top bar -->
+      <header class="topbar">
+        <button type="button" class="mobile-menu" aria-label="Buka menu" onclick="toggleSidebar()">
+          <span id="menu-icon"></span>
+        </button>
+        <a class="mobile-brand" href="#" onclick="navigate('home');return false" aria-label="BahasaKita, beranda">
+          <span class="mobile-brand-text">BahasaKita</span>
+        </a>
+        <div class="breadcrumb">
+          Ruang belajarmu <span id="breadcrumb-icon"></span>
+          <strong id="breadcrumb-title">Beranda</strong>
+        </div>
+        <div class="topbar-right"><button class="astro-login" onclick="showPage('login')">Masuk</button><button class="btn astro-start" onclick="navigate('assessment')">Mulai belajar</button>
+          <button type="button" class="topbar-theme-toggle" aria-label="Pengaturan aksesibilitas" onclick="navigate('settings')">⚙</button>
+          <button type="button" class="topbar-theme-toggle" aria-label="Ganti tema" onclick="toggleTheme()">
+            <span id="theme-icon"></span>
+          </button>
+          <button type="button" class="topbar-avatar" onclick="navigate('profile')" aria-label="Profil saya">
+            <span id="topbar-avatar-text"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main content area -->
+      <main id="main" class="main-content" tabindex="-1">
+        <!-- Pages rendered here by JS -->
+      </main>
+    </div>
+
+    <!-- Bottom navigation (mobile) -->
+    <nav id="bottom-nav" class="bottom-nav" aria-label="Navigasi utama">
+      <!-- Generated by JS -->
+    </nav>
+  </div>
+
+  <!-- ==================== WORD DIALOG (MODAL) ==================== -->
+  <dialog id="word-dialog" class="word-dialog">
+    <button type="button" class="dialog-close icon-btn" onclick="closeWordDialog()" aria-label="Tutup">✕</button>
+    <div id="word-dialog-content"></div>
+  </dialog>
+
+  <!-- ==================== VIDEO DIALOG (MODAL) ==================== -->
+  <dialog id="video-dialog" class="word-dialog source-word-dialog home-video-dialog">
+    <button type="button" class="dialog-close icon-btn" onclick="closeVideoDialog()" aria-label="Tutup video">✕</button>
+    <div id="video-dialog-content"></div>
+  </dialog>
+
+  <!-- Scripts -->
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
