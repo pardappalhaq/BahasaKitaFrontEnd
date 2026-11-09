@@ -4,6 +4,8 @@ Projek website **BahasaKita** yang dibuat ulang menggunakan **HTML, CSS, dan Jav
 
 Platform e-learning Bahasa Isyarat Indonesia yang ramah aksesibilitas dan inklusif untuk siswa tunarungu (jenjang SD, SMP, SMA).
 
+**Situs online** · [BahasaKita](https://bahasakitafrontend.vercel.app/)
+
 ---
 
 ## Struktur File
