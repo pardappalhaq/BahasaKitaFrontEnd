@@ -1,6 +1,6 @@
-# BahasaKita — Versi HTML, CSS, JavaScript Murni
+# BahasaKita — Versi HTML, CSS, JavaScript 
 
-Projek website **BahasaKita** yang dibuat ulang menggunakan **HTML, CSS, dan JavaScript murni (Vanilla JS)** tanpa menggunakan React atau framework/bundler apa pun.
+Projek website **BahasaKita** yang dibuat ulang menggunakan **HTML, CSS, dan JavaScript**.
 
 Platform e-learning Bahasa Isyarat Indonesia yang ramah aksesibilitas dan inklusif untuk siswa tunarungu (jenjang SD, SMP, SMA).
 
