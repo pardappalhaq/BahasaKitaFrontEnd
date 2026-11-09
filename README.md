@@ -6,7 +6,7 @@ Platform e-learning Bahasa Isyarat Indonesia yang ramah aksesibilitas dan inklus
 
 ---
 
-## 📁 Struktur File
+## Struktur File
 
 ```
 BahasaKitaFrontEnd/
@@ -23,7 +23,7 @@ BahasaKitaFrontEnd/
 
 ---
 
-## ✨ Fitur-Fitur yang Tersedia
+## Fitur-Fitur yang Tersedia
 
 1. **Layar Pembuka (Splash Screen):**
    - Animasi logo dan tagline BahasaKita
