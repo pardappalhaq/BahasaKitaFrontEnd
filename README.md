@@ -2,7 +2,7 @@
 
 Projek website **BahasaKita** yang dibuat ulang menggunakan **HTML, CSS, dan JavaScript murni (Vanilla JS)** tanpa menggunakan React atau framework/bundler apa pun.
 
-Platform e-learning Bahasa Isyarat Indonesia (BISINDO) yang ramah aksesibilitas dan inklusif untuk siswa tunarungu (jenjang SD, SMP, SMA).
+Platform e-learning Bahasa Isyarat Indonesia yang ramah aksesibilitas dan inklusif untuk siswa tunarungu (jenjang SD, SMP, SMA).
 
 ---
 
@@ -75,7 +75,7 @@ BahasaKitaFrontEnd/
 
 ---
 
-## 🚀 Cara Menjalankan
+## Cara Menjalankan
 
 ### Cara 1: Menggunakan XAMPP
 Jalankan Apache dari XAMPP, lalu buka `http://localhost/BahasaKitaFrontEnd/` jika folder proyek berada di `htdocs`. Pemutar YouTube memerlukan halaman yang disajikan melalui HTTP atau HTTPS.
@@ -97,7 +97,7 @@ Buka browser di `http://localhost:8000` atau alamat yang tertera.
 
 ---
 
-## 🎨 Palet Warna & Desain
+## Palet Warna & Desain
 
 - **Warna Utama (Primary):** `#1559E8` (Biru)
 - **Aksen Lembut:** `#EAF0FF`
