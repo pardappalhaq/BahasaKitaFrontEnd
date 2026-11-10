@@ -45,7 +45,6 @@
   <div id="auth-page" class="auth-backdrop soft-login-backdrop" style="display:none">
     <a class="auth-brand" href="#" onclick="showPage('login');return false"><span class="brand-symbol"></span><span>BahasaKita<small>Ruang untuk bertumbuh</small></span></a>
     <section class="auth-story" aria-labelledby="auth-story-title">
-      <p class="home-eyebrow">BELAJAR. BEREKSPRESI. BERTUMBUH.</p>
       <h2 id="auth-story-title">Duniamu,<br><em>tanpa batas.</em></h2>
       <p>Setiap isyarat membuka cerita baru. Temukan cara belajarmu, selangkah demi selangkah.</p>
       <div class="auth-story-photo"><img src="images/belajar-bersama.jpg" alt="Sekelompok pelajar menikmati waktu belajar bersama" width="1600" height="1067"></div>
@@ -76,14 +75,15 @@
               </label>
               <div class="login-help-row">
                 <label class="login-remember"><input type="checkbox" id="login-remember"><span>Ingat email saya</span></label>
-                <a href="#" onclick="document.getElementById('login-error').textContent='Ini versi demo lokal. Gunakan tombol Coba versi demo untuk menjelajahi aplikasi.';document.getElementById('login-error').style.display='';return false">Lupa kata sandi?</a>
+                <a href="#" onclick="document.getElementById('login-error').textContent='Pemulihan kata sandi belum tersedia.';document.getElementById('login-error').style.display='';return false">Lupa kata sandi?</a>
               </div>
               <p class="login-error" id="login-error" role="alert" style="display:none"></p>
-              <button class="btn login-rounded-submit" type="submit">Masuk dan mulai belajar</button>
+              <button class="btn login-rounded-submit login-primary-action" type="submit">Masuk <span data-ui-icon="arrow"></span></button>
             </form>
-            <div class="login-line-divider"><span>ATAU</span></div>
-            <div class="social-login-options">
-              <button type="button" onclick="demoLogin()">Coba versi demo <span data-ui-icon="external"></span></button>
+            <div class="login-line-divider login-provider-divider"><span>ATAU</span></div>
+            <div class="login-provider-options">
+              <button type="button" onclick="animateProviderButton(this)"><img src="images/google-g.png" alt="" width="18" height="18">Masuk dengan Google</button>
+              <button type="button" onclick="animateProviderButton(this)"><span data-ui-icon="apple"></span>Masuk dengan Apple</button>
             </div>
             <div class="login-signup-bottom">
               <span>Belum punya profil?</span>
@@ -155,15 +155,16 @@
                 </div>
               </label>
               <p class="login-error" id="register-error" role="alert" style="display:none"></p>
-              <button class="btn login-rounded-submit" type="submit">Register</button>
+              <button class="btn login-rounded-submit login-primary-action" type="submit">Daftar <span data-ui-icon="arrow"></span></button>
             </form>
-            <div class="login-line-divider"><span>ATAU</span></div>
-            <div class="social-login-options">
-              <button type="button" onclick="demoLogin()">Coba versi demo <span data-ui-icon="external"></span></button>
+            <div class="login-line-divider login-provider-divider"><span>ATAU</span></div>
+            <div class="login-provider-options">
+              <button type="button" onclick="animateProviderButton(this)"><img src="images/google-g.png" alt="" width="18" height="18">Daftar dengan Google</button>
+              <button type="button" onclick="animateProviderButton(this)"><span data-ui-icon="apple"></span>Daftar dengan Apple</button>
             </div>
             <div class="login-signup-bottom">
               <span>Sudah punya profil?</span>
-              <a href="#" class="login-register-link" onclick="showPage('login');return false">Login</a>
+              <a href="#" class="login-register-link" onclick="showPage('login');return false">Masuk</a>
             </div>
           </section>
         </div>

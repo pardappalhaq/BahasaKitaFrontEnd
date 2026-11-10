@@ -157,6 +157,16 @@ function handleRegister(e) {
   showApp();
 }
 
+function animateProviderButton(button) {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !state.comfortable) {
+    button.getAnimations().forEach(animation => animation.cancel());
+    button.animate([
+      { transform: 'scale(.97)', boxShadow: '0 0 0 3px var(--primary-light)' },
+      { transform: 'scale(1)', boxShadow: '0 0 0 0 transparent' },
+    ], { duration: 220, easing: 'ease-out' });
+  }
+}
+
 function demoLogin() {
   state.profile = { name: 'Teman Belajar', email: 'demo@bahasakita.id', grade: 'SD', role: 'student' };
   state.grade = 'SD';

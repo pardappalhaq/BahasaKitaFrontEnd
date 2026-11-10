@@ -893,6 +893,55 @@ button,a,input,select {
   font-size:9px;
   color:var(--muted)
 }
+.login-soft-card .login-primary-action {
+  gap:8px;
+  background:var(--primary);
+  color:#0b2110;
+  font-size:14px;
+}
+.login-soft-card .login-primary-action:hover {
+  background:var(--primary-hover);
+}
+.login-provider-divider {
+  font-size:13px;
+  letter-spacing:normal;
+}
+.login-provider-options {
+  display:grid;
+  gap:10px;
+}
+.login-provider-options > button {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:44px;
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:99px;
+  background:var(--soft);
+  color:var(--text);
+  font-size:13px;
+  cursor:pointer;
+  transition:border-color var(--transition), background-color var(--transition);
+}
+.login-provider-options > button:hover,
+.login-provider-options > button:focus-visible {
+  border-color:var(--primary);
+  background:var(--panel);
+}
+.login-provider-options > button:focus-visible {
+  outline:2px solid var(--primary);
+  outline-offset:2px;
+}
+.login-provider-options img {
+  flex-shrink:0;
+  object-fit:contain;
+}
+.login-primary-action > span,
+.login-provider-options button > span {
+  display:inline-flex;
+}
 .social-login-options {
   display:flex
 }
