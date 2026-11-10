@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BahasaKita adalah Platform belajar bahasa isyarat Indonesia untuk siswa tunarungu.">
   <title>BahasaKita</title>
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%201%201%27%2F%3E">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/reference.css">
   <link rel="stylesheet" href="css/astro.css">
@@ -48,8 +48,7 @@
       <p class="home-eyebrow">BELAJAR. BEREKSPRESI. BERTUMBUH.</p>
       <h2 id="auth-story-title">Duniamu,<br><em>tanpa batas.</em></h2>
       <p>Setiap isyarat membuka cerita baru. Temukan cara belajarmu, selangkah demi selangkah.</p>
-      <div class="auth-story-photo"><img src="images/belajar-bersama.jpg" alt="Sekelompok pelajar menikmati waktu belajar bersama" width="1600" height="1067"><span class="photo-note"> &nbsp; Berbeda cara, bersama bertumbuh.</span></div>
-      <div class="auth-story-details"><span>Bahasa isyarat Indonesia</span><span>SD · SMP · SMA</span><span>Belajar sesuai ritmemu</span></div>
+      <div class="auth-story-photo"><img src="images/belajar-bersama.jpg" alt="Sekelompok pelajar menikmati waktu belajar bersama" width="1600" height="1067"></div>
     </section>
     <!-- Login -->
     <div id="login-page" class="auth-shell auth-frame auth-login-page" style="display:none">
@@ -84,7 +83,7 @@
             </form>
             <div class="login-line-divider"><span>ATAU</span></div>
             <div class="social-login-options">
-              <button type="button" onclick="demoLogin()">Coba versi demo <span aria-hidden="true">↗</span></button>
+              <button type="button" onclick="demoLogin()">Coba versi demo <span data-ui-icon="external"></span></button>
             </div>
             <div class="login-signup-bottom">
               <span>Belum punya profil?</span>
@@ -160,7 +159,7 @@
             </form>
             <div class="login-line-divider"><span>ATAU</span></div>
             <div class="social-login-options">
-              <button type="button" onclick="demoLogin()">Coba versi demo <span aria-hidden="true">↗</span></button>
+              <button type="button" onclick="demoLogin()">Coba versi demo <span data-ui-icon="external"></span></button>
             </div>
             <div class="login-signup-bottom">
               <span>Sudah punya profil?</span>
@@ -208,7 +207,7 @@
           <strong id="breadcrumb-title">Beranda</strong>
         </div>
         <div class="topbar-right"><button class="astro-login" onclick="showPage('login')">Masuk</button><button class="btn astro-start" onclick="navigate('assessment')">Mulai belajar</button>
-          <button type="button" class="topbar-theme-toggle" aria-label="Pengaturan aksesibilitas" onclick="navigate('settings')">⚙</button>
+          <button type="button" class="topbar-theme-toggle" aria-label="Pengaturan aksesibilitas" onclick="navigate('settings')" data-ui-icon="settings"></button>
           <button type="button" class="topbar-theme-toggle" aria-label="Ganti tema" onclick="toggleTheme()">
             <span id="theme-icon"></span>
           </button>
@@ -232,19 +231,37 @@
 
   <!-- ==================== WORD DIALOG (MODAL) ==================== -->
   <dialog id="word-dialog" class="word-dialog">
-    <button type="button" class="dialog-close icon-btn" onclick="closeWordDialog()" aria-label="Tutup">✕</button>
+    <button type="button" class="dialog-close icon-btn" onclick="closeWordDialog()" aria-label="Tutup" data-ui-icon="close"></button>
     <div id="word-dialog-content"></div>
   </dialog>
 
   <!-- ==================== VIDEO DIALOG (MODAL) ==================== -->
   <dialog id="video-dialog" class="word-dialog source-word-dialog home-video-dialog">
-    <button type="button" class="dialog-close icon-btn" onclick="closeVideoDialog()" aria-label="Tutup video">✕</button>
+    <button type="button" class="dialog-close icon-btn" onclick="closeVideoDialog()" aria-label="Tutup video" data-ui-icon="close"></button>
     <div id="video-dialog-content"></div>
+  </dialog>
+
+  <dialog id="sign-camera-dialog" class="word-dialog sign-camera-dialog" aria-labelledby="sign-camera-title">
+    <button type="button" class="dialog-close icon-btn" onclick="closeSignCamera()" aria-label="Tutup latihan kamera" data-ui-icon="close"></button>
+    <h2 id="sign-camera-title">Latihan huruf isyarat</h2>
+    <p>Nyalakan kamera dan tirukan contoh pose. Pastikan tangan dan jari terlihat jelas. Huruf yang cocok akan muncul otomatis.</p>
+    <video id="sign-camera-video" autoplay playsinline muted hidden aria-label="Pratinjau kamera"></video>
+    <p id="sign-camera-status" role="status">Kamera belum aktif.</p>
+    <div class="sign-camera-actions">
+      <button type="button" class="btn secondary" id="sign-camera-toggle">Nyalakan kamera</button>
+    </div>
+    <details class="sign-camera-reference">
+      <summary>Lihat contoh pose A–Z</summary>
+      <label class="field">Huruf contoh <select id="sign-camera-letter"></select></label>
+      <img id="sign-camera-example" width="320" height="240" alt="Contoh pose huruf BISINDO">
+      <p><a href="https://github.com/rhiosutoyo/Indonesian-Sign-Language-BISINDO-Hand-Sign-Detection-Dataset" target="_blank" rel="noopener">Sumber foto BISINDO</a></p>
+    </details>
   </dialog>
 
   <!-- Scripts -->
   <script src="js/icons.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/sign-camera.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

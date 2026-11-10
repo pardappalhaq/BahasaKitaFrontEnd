@@ -19,7 +19,7 @@ BahasaKitaFrontEnd/
 ├── js/
 │   ├── app.js          # Logika aplikasi, router, state management, interaktivitas
 │   ├── data.js         # Data materi pembelajaran, kamus visual, video YouTube, soal asesmen
-│   └── icons.js        # Kumpulan ikon SVG kustom BahasaKita
+│   └── icons.js        # Ikon SVG Font Awesome Free dan Tabler Icons
 └── README.md           # Dokumentasi projek
 ```
 
@@ -48,6 +48,7 @@ BahasaKitaFrontEnd/
    - Alur materi berurutan untuk jenjang SD, SMP, dan SMA
    - Materi terkunci yang terbuka secara otomatis setelah materi sebelumnya diselesaikan
    - Sesi belajar 4 tahap: **Pengantar → Isyarat & Visual → Latihan → Evaluasi**
+   - Latihan kamera untuk pose diam alfabet BISINDO A–Z dengan contoh bawaan dari [dataset Joan dkk.](https://github.com/rhiosutoyo/Indonesian-Sign-Language-BISINDO-Hand-Sign-Detection-Dataset). Foto dipotong agar fokus pada tangan dan data posisi tangan diekstrak menggunakan MediaPipe. Kamera memerlukan HTTPS atau localhost.
 
 5. **Kamus Visual (Visual Dictionary):**
    - Tab filter jenjang (SD / SMP / SMA)

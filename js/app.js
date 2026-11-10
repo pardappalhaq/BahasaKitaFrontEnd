@@ -17,6 +17,9 @@ const state = {
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', function () {
   loadState();
+  document.querySelectorAll('[data-ui-icon]').forEach(function (element) {
+    element.innerHTML = icon(element.dataset.uiIcon, 16);
+  });
   updateIcons();
 
   // Show splash, then transition
@@ -162,6 +165,7 @@ function demoLogin() {
 }
 
 function logout() {
+  closeSignCamera();
   state.profile = null;
   state.assessment = null;
   state.mastered = [];
@@ -227,7 +231,7 @@ function updateSidebarProfile() {
   if (!state.profile) return;
   el.innerHTML =
     '<div class="sidebar-profile-info">' +
-    '<div class="sidebar-avatar">👤</div>' +
+    '<div class="sidebar-avatar">' + icon('profile', 20) + '</div>' +
     '<div><strong>' + displayName(state.profile.name) + '</strong>' +
     '<small>' + (state.profile.grade || 'Siswa') + '</small></div>' +
     '</div>' +
@@ -278,6 +282,7 @@ const pageTitles = {
 };
 
 function navigate(page, params) {
+  closeSignCamera();
   state.currentPage = page;
   window.scrollTo(0, 0);
 
@@ -322,7 +327,6 @@ function renderHome() {
   ];
   return `<div class="astro-home">
     <section class="astro-hero" aria-labelledby="astro-title">
-      <span class="astro-badge"><span aria-hidden="true"></span> Ruang belajar untuk setiap anak</span>
       <h1 id="astro-title">RUANG UNTUK <span>BELAJAR</span><br>DAN TUMBUH BERSAMA</h1>
       <p>Kenali dunia lewat kata, visual, dan bahasa isyarat.</p>
       <button class="btn astro-cta" onclick="${action}">${state.assessment ? 'Lanjutkan belajar' : 'Mulai petualangan'}</button>
@@ -331,10 +335,16 @@ function renderHome() {
       <svg class="gallery-string" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true"><path d="M-40 0 Q720 250 1480 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
       <div class="hanging-track">${cards.map((card,i)=>`<a class="hanging-card hanging-${i}" href="#" onclick="navigate('${card.page}');return false"><span class="green-clip" aria-hidden="true"></span><img src="images/${card.image}" alt="" width="500" height="360"><div><h2>${card.title}</h2><p>${card.description}</p></div></a>`).join('')}</div>
     </section>
-    <div class="astro-values" aria-label="Pendekatan belajar"><span>${icon('shapes',25)} BISINDO</span><span>${icon('book',25)} Belajar visual</span><span>${icon('graduation',25)} SD · SMP · SMA</span><span>${icon('shapes',25)} 4 aspek belajar</span><span>${icon('chart',25)} Bertumbuh bersama</span></div>
-    <section class="astro-continue"><div><span class="home-eyebrow">LANGKAH KECIL, CERITA BESAR</span><h2>Caramu belajar. Ritmemu sendiri.</h2><p>Mulai dari asesmen singkat, lalu ikuti materi yang sesuai dengan kemampuanmu.</p></div><button class="btn" onclick="${action}">Temukan langkahmu ${icon('arrow',18)}</button></section>
+    <div class="astro-values" aria-label="Pendekatan belajar">
+      <span>${icon('tablerHand', 25)} BISINDO</span>
+      <span>${icon('bookReader', 25)} Belajar visual</span>
+      <span>${icon('tablerSchool', 25)} SD · SMP · SMA</span>
+      <span>${icon('tablerGrid', 25)} 4 aspek belajar</span>
+      <span>${icon('tablerTrend', 25)} Bertumbuh bersama</span>
+    </div>
+    <section class="astro-continue"><div><h2>Caramu belajar. Ritmemu sendiri.</h2><p>Mulai dari asesmen singkat, lalu ikuti materi yang sesuai dengan kemampuanmu.</p></div><button class="btn" onclick="${action}">Temukan langkahmu ${icon('arrow',18)}</button></section>
     ${renderVideoCarousel(grade,youtubeMaterials[grade] || youtubeMaterials.SD)}
-    <footer class="home-footer"><span>BahasaKita · Ruang untuk bertumbuh</span><button onclick="navigate('settings')">Pengaturan aksesibilitas</button></footer>
+    <footer class="home-footer"><span>BahasaKita · Ruang untuk bertumbuh</span><button onclick="navigate('settings')"></button></footer>
   </div>`;
 }
 
@@ -352,7 +362,6 @@ function renderBookArt() {
 function renderVideoCarousel(grade, videos) {
   let html = '<section class="home-video-section" aria-labelledby="home-videos-title">' +
     '<div class="home-section-heading"><div>' +
-    '<p class="home-eyebrow">VIDEO PILIHAN · ' + grade + '</p>' +
     '<h2 id="home-videos-title">Caramu belajar, <span>cerita hebatmu.</span></h2>' +
     '<p>Amati isyarat dan visual dari video pembelajaran sesuai jenjangmu.</p></div>' +
     '<div class="home-video-controls">' +
@@ -400,6 +409,10 @@ function renderLearning() {
       '<a href="#" class="btn" onclick="navigate(\'assessment\');return false">Mulai asesmen</a></div>';
   }
 
+  html += '<section class="panel sign-camera-card"><div><h2>Latihan huruf isyarat</h2>' +
+    '<p>Tirukan contoh pose dan lihat hurufnya langsung dari kamera.</p></div>' +
+    '<button type="button" class="btn" onclick="openSignCamera()">Buka latihan kamera</button></section>';
+
   html += '<div class="path-list">';
   lessons.forEach(function (lesson, i) {
     const complete = state.mastered.includes(lesson.id);
@@ -424,7 +437,7 @@ function renderLearning() {
       '</div>' +
       (available && !complete ?
         '<a href="#" class="btn" onclick="navigate(\'lesson\', {id:\'' + lesson.id + '\'});return false">Mulai belajar' + icon('arrow', 17) + '</a>' :
-        complete ? '<span class="tag purple">Selesai ✓</span>' :
+        complete ? '<span class="tag purple">Selesai ' + icon('check', 12) + '</span>' :
           '<span class="locked-label">' + icon('lock', 16) + (assessed ? 'Selesaikan materi sebelumnya' : 'Selesaikan asesmen awal') + '</span>') +
       '</article></div>';
   });
@@ -517,7 +530,8 @@ function renderYoutubeLessons(grade) {
 
   videos.forEach(function (video) {
     html += '<article class="panel youtube-lesson">' +
-      '<div class="youtube-lesson-art">' + icon('play', 28) + ' ' + video.topic + '</div>' +
+      '<div class="home-video-thumbnail"><img src="' + youtubeThumbnail(video.id) + '" alt="" loading="lazy" width="480" height="360"></div>' +
+      '<span class="home-video-topic">' + video.topic + '</span>' +
       '<h3>' + video.title + '</h3>' +
       '<p>' + video.description + '</p>' +
       '<button class="btn secondary" onclick="openVideoDialog(\'' + video.id + '\', \'' + escapeAttr(video.title) + '\', \'' + escapeAttr(video.description) + '\', \'' + grade + '\', \'' + escapeAttr(video.topic) + '\')">' +
@@ -535,15 +549,13 @@ function renderAssessment() {
 
   // Already assessed
   if (state.assessment) {
-    let html = '<div class="page-heading"><div><h1>Asesmen selesai</h1>' +
-      '<p>Kamu sudah menyelesaikan asesmen awal.</p></div></div>';
-    html += renderProfileGrid();
-    html += '<div class="panel result-summary">' +
-      icon('trophy', 35) +
-      '<div><h2>Kamu siap melanjutkan belajar</h2>' +
-      '<p>Hasil dan jawabanmu sudah tersimpan.</p></div>' +
-      '<a href="#" class="btn" onclick="navigate(\'learning\');return false">Lanjut belajar</a></div>';
-    return html;
+    return '<div class="assessment-results"><header class="panel result-summary">' +
+      '<div class="icon-tile green" aria-hidden="true">' + icon('trophy') + '</div>' +
+      '<div class="result-summary-copy"><h1>Asesmen selesai</h1>' +
+      '<p>Hasilmu sudah tersimpan. Kamu bisa melanjutkan ke jalur belajar.</p></div>' +
+      '<a href="#" class="btn" onclick="navigate(\'learning\');return false">Lanjut belajar' + icon('arrow', 17) + '</a></header>' +
+      '<section aria-labelledby="assessment-scores"><h2 id="assessment-scores">Hasil per aspek</h2>' +
+      renderProfileGrid() + '</section></div>';
   }
 
   // Active assessment
@@ -552,13 +564,16 @@ function renderAssessment() {
   }
 
   // Intro
-  return '<div class="page-heading"><div><h1>Bukan ujian. Ini titik awalmu.</h1>' +
-    '<p>Jawab sesuai yang kamu pahami. Tidak perlu terburu-buru.</p></div></div>' +
-    '<div class="panel assessment-intro">' +
-    '<div class="large-icon">' + icon('shapes', 48) + '</div>' +
-    '<h2>8 soal, 4 aspek kemampuan (' + grade + ')</h2>' +
-    '<p>Kosakata, kalimat, bacaan, dan matematika dasar.<br>Soal disesuaikan jenjangmu.</p>' +
-    '<button class="btn" onclick="startAssessment()">Mulai asesmen</button></div>';
+  return '<div class="assessment-start"><header class="page-heading"><div>' +
+    '<h1>Bukan ujian. Ini titik awalmu.</h1>' +
+    '<p>Jawab sesuai yang kamu pahami. Tidak perlu terburu-buru.</p></div></header>' +
+    '<section class="panel assessment-intro" aria-labelledby="assessment-intro-title">' +
+    '<div class="icon-tile green" aria-hidden="true">' + icon('clipboardList') + '</div>' +
+    '<div class="assessment-intro-copy"><span class="tag neutral">Jenjang ' + grade + '</span>' +
+    '<h2 id="assessment-intro-title">' + questions.length + ' soal, ' + aspects.length + ' aspek kemampuan</h2>' +
+    '<p>Kosakata, kalimat, bacaan, dan matematika dasar. Soal disesuaikan dengan jenjangmu.</p>' +
+    '<button class="btn" type="button" onclick="startAssessment()">Mulai asesmen' + icon('arrow', 17) + '</button>' +
+    '</div></section></div>';
 }
 
 function startAssessment() {
@@ -586,9 +601,7 @@ function renderAssessmentQuestion() {
     '<span>Soal ' + (aa.current + 1) + ' dari ' + aa.questions.length + '</span></div>' +
     '<progress max="' + aa.questions.length + '" value="' + aa.current + '" aria-label="Kemajuan asesmen"></progress>';
 
-  if (q.visual) {
-    html += '<div class="question-visual" role="img">' + q.visual + '</div>';
-  }
+  html += renderWordPhoto(q, 'assessment-question-photo');
 
   html += '<h2>' + q.prompt + '</h2>' +
     '<div class="answer-options">';
@@ -685,7 +698,7 @@ function renderLesson(params) {
   const stageKey = 'lesson-stage-' + lesson.id;
   let stage = parseInt(sessionStorage.getItem(stageKey) || '0');
 
-  let html = '<div class="learning-page lesson-page"><a href="#" class="back-link" onclick="navigate(\'learning\');return false">← Kembali belajar</a>' +
+  let html = '<div class="learning-page lesson-page"><a href="#" class="back-link" onclick="navigate(\'learning\');return false">' + icon('arrowLeft', 14) + 'Kembali belajar</a>' +
     '<div class="page-heading"><div><h1>' + lesson.title + '</h1><p>' + lesson.description + '</p></div></div>' +
     '<div class="inline-tags"><span class="tag">' + lesson.grade + '</span></div>';
 
@@ -841,15 +854,15 @@ function renderProgress() {
 
   // Stats
   html += '<section class="progress-section"><h2>Ringkasan belajar</h2><div class="learning-stats">' +
-    renderStatCard('trophy', 'purple', state.mastered.length + ' materi', 'Sudah kamu kuasai') +
-    renderStatCard('refresh', 'blue', lessonAttempts.length + ' sesi', 'Usaha belajar yang tercatat') +
-    renderStatCard('clock', 'pink', (lessonAttempts.length * 8) + ' menit', 'Estimasi waktu belajar') +
+    renderStatCard('medal', 'purple', state.mastered.length + ' materi', 'Sudah kamu kuasai') +
+    renderStatCard('history', 'blue', lessonAttempts.length + ' sesi', 'Usaha belajar yang tercatat') +
+    renderStatCard('tablerClock', 'pink', (lessonAttempts.length * 8) + ' menit', 'Estimasi waktu belajar') +
     '</div></section>';
 
   // Profile grid
   html += '<section class="progress-section"><h2>Profil kemampuanmu</h2>' +
     '<p>' + (assessed ? 'Diperbarui setelah setiap evaluasi.' : 'Selesaikan asesmen untuk melihat profil awal.') + '</p>' +
-    renderProfileGrid() + '</section>';
+    renderProfileGrid({ vocabulary: 'spellCheck', sentence: 'penToSquare', reading: 'bookReader', math: 'calculator' }) + '</section>';
 
   // History
   html += '<section class="panel progress-section history-panel"><h2>Jejak belajarmu</h2>';
@@ -860,8 +873,11 @@ function renderProgress() {
   } else {
     html += '<ul class="history-list" role="list">';
     [...state.attempts].reverse().forEach(function (a) {
+      const isAssessment = a.type === 'assessment';
+      const entryIcon = isAssessment ? 'clipboardList' : a.mastered ? 'circleCheck' : 'tablerBook';
+      const color = isAssessment ? 'blue' : a.mastered ? 'green' : 'purple';
       html += '<li class="history-row">' +
-        '<div class="icon-tile ' + (a.mastered ? 'purple' : 'blue') + '">' + icon(a.type === 'assessment' ? 'shapes' : a.mastered ? 'check' : 'leaf') + '</div>' +
+        '<div class="icon-tile ' + color + '">' + icon(entryIcon) + '</div>' +
         '<div><h3>' + (a.title || 'Sesi belajar') + '</h3>' +
         '<p>' + new Date(a.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) + '</p></div></li>';
     });
@@ -875,12 +891,12 @@ function renderStatCard(iconName, color, value, label) {
     '<div><strong>' + value + '</strong><p>' + label + '</p></div></div>';
 }
 
-function renderProfileGrid() {
+function renderProfileGrid(aspectIcons = {}) {
   let html = '<div class="profile-grid">';
   aspects.forEach(function (a) {
     const score = state.assessment ? (state.assessment[a.id] || 0) : 0;
     html += '<div class="panel profile-card">' +
-      '<div class="icon-tile ' + a.color + '">' + icon(a.icon) + '</div>' +
+      '<div class="icon-tile ' + a.color + '">' + icon(aspectIcons[a.id] || a.icon) + '</div>' +
       '<h3>' + a.name + '</h3>' +
       '<strong>' + score + '<small>%</small></strong>' +
       '<progress value="' + score + '" max="100" aria-label="Kemampuan ' + a.name + '"></progress>' +
@@ -898,10 +914,10 @@ function renderProfile() {
 
   let html = '<div class="profile-page"><header class="page-heading"><div><h1>Profil saya</h1>' +
     '<p>Kenali dirimu dan perjalanan belajarmu.</p></div>' +
-    '<a href="#" class="btn secondary" onclick="navigate(\'settings\');return false">' + icon('settings', 17) + 'Edit profil</a></header>';
+    '<a href="#" class="btn secondary" onclick="navigate(\'settings\');return false">' + icon('tablerUserEdit', 17) + 'Edit profil</a></header>';
 
   html += '<section class="panel profile-overview">' +
-    '<div class="profile-main-avatar" aria-hidden="true">' + icon('profile', 32) + '</div>' +
+    '<div class="profile-main-avatar" aria-hidden="true">' + icon('tablerUser', 32) + '</div>' +
     '<div class="profile-identity"><h2>' + (name || 'Teman belajar') + '</h2>' +
     '<p>Belajar dengan caramu, bertumbuh dengan ritmemu.</p></div></section>';
 
@@ -911,11 +927,11 @@ function renderProfile() {
     '<div><dt>Tujuan belajar</dt><dd>' + (profile?.goal || 'Mengenal kata') + '</dd></div></dl></section>';
 
   html += '<section class="profile-progress"><div class="profile-progress-heading"><h2>Ringkasan belajar</h2>' +
-    '<a href="#" class="btn secondary" onclick="navigate(\'progress\');return false">Lihat kemajuan' + icon('arrow', 17) + '</a></div>' +
+    '<a href="#" class="btn secondary" onclick="navigate(\'progress\');return false">Lihat kemajuan' + icon('tablerArrowRight', 17) + '</a></div>' +
     '<div class="learning-stats">' +
-    renderStatCard('trophy', 'purple', state.mastered.length + ' materi', 'Sudah dikuasai') +
-    renderStatCard('chart', 'blue', (state.assessment ? 'Sudah selesai' : 'Belum dimulai'), 'Asesmen awal') +
-    renderStatCard('refresh', 'pink', lessonAttempts.length + ' sesi', 'Sesi belajar tercatat') +
+    renderStatCard('medal', 'purple', state.mastered.length + ' materi', 'Sudah dikuasai') +
+    renderStatCard('clipboardList', 'blue', (state.assessment ? 'Sudah selesai' : 'Belum dimulai'), 'Asesmen awal') +
+    renderStatCard('history', 'pink', lessonAttempts.length + ' sesi', 'Sesi belajar tercatat') +
     '</div></section>';
   return html + '</div>';
 }
@@ -933,8 +949,8 @@ function renderSettings() {
     '<option value="SD"' + (state.grade === 'SD' ? ' selected' : '') + '>SD</option>' +
     '<option value="SMP"' + (state.grade === 'SMP' ? ' selected' : '') + '>SMP</option>' +
     '<option value="SMA"' + (state.grade === 'SMA' ? ' selected' : '') + '>SMA</option></select></label></div>' +
-    '<button class="btn" type="submit">Simpan profil</button>' +
-    '<p id="settings-notice" role="status"></p></form></section>' +
+    '<div class="settings-form-actions"><p id="settings-notice" role="status"></p>' +
+    '<button class="btn" type="submit">Simpan profil</button></div></form></section>' +
     '<section class="panel settings-panel"><h2>Akun dan data</h2>' +
     '<div class="settings-account-row"><div><h3>Keluar dari akun</h3>' +
     '<p>Kembali ke halaman masuk.</p></div>' +

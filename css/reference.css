@@ -799,23 +799,6 @@ button,a,input,select {
   height:100%;
   object-fit:cover
 }
-.photo-note {
-  position:absolute;
-  bottom:17px;
-  left:23px;
-  padding:8px 13px;
-  border-radius:30px;
-  color:#152744;
-  background:#fffffff0;
-  font-size:10px
-}
-.auth-story-details {
-  display:flex;
-  flex-wrap:wrap;
-  gap:16px;
-  font-size:9px;
-  color:var(--muted)
-}
 .auth-shell {
   width:100%;
   min-width:0
@@ -997,6 +980,16 @@ button,a,input,select {
 .lesson-question-photo {
   width:min(100%, 240px);
   max-height:180px
+}
+.assessment-question-photo {
+  display:block;
+  width:min(100%, 440px);
+  aspect-ratio:16/9;
+  padding:10px;
+  margin:16px auto 20px;
+  border-radius:14px;
+  background:var(--soft);
+  object-fit:contain;
 }
 .path-card-content {
   flex:1
@@ -1370,22 +1363,12 @@ button,a,input,select {
   height:240px;
   border-radius:50px 20px
 }
-.auth-story-details {
-  font-size:9px
-}
-.auth-story-details>span:last-child {
-  display:none
-}
 .login-soft-card {
   padding:27px
 }
 .auth-story .home-eyebrow {
   font-size:8px;
   letter-spacing:1.3px
-}
-.photo-note {
-  font-size:8px;
-  left:10px
 }
 .path-card {
   flex-wrap:wrap
@@ -1606,7 +1589,7 @@ button,a,input,select {
   font-size:12px;
   max-width:100%
 }
-.auth-story-photo,.auth-story-details {
+.auth-story-photo {
   display:none
 }
 .auth-shell {
@@ -1716,9 +1699,46 @@ body {
 
 }
 
+.assessment-start {
+  max-width:820px;
+  margin-inline:auto;
+  padding-block:12px 40px;
+}
+.assessment-start .page-heading {
+  margin-bottom:24px;
+}
+.assessment-intro {
+  display:flex;
+  align-items:flex-start;
+  gap:clamp(12px, 3vw, 22px);
+  padding:clamp(16px, 4vw, 32px);
+}
+.assessment-intro .icon-tile {
+  flex-shrink:0;
+}
+.assessment-intro-copy {
+  min-width:0;
+}
+.assessment-intro h2 {
+  margin:10px 0 6px;
+  font-size:clamp(18px, 3vw, 22px);
+}
+.assessment-intro p {
+  color:var(--muted);
+}
+.assessment-intro .btn {
+  margin-top:18px;
+}
+@media(max-width:540px) {
+  .assessment-intro {
+    flex-direction:column;
+  }
+}
+
 .learning-page,
 .profile-page,
-.progress-page {
+.progress-page,
+.assessment-results {
   max-width:1160px;
   margin-inline:auto;
   padding-bottom:40px;
@@ -1726,6 +1746,78 @@ body {
 .learning-page .notice,
 .lesson-page .quiz-actions {
   flex-wrap:wrap;
+}
+.sign-camera-card,
+.sign-camera-actions {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;
+}
+.sign-camera-card {
+  justify-content:space-between;
+  margin-top:20px;
+}
+.sign-camera-card h2 {
+  font-size:1.125em;
+}
+.sign-camera-card p,
+.sign-camera-dialog p {
+  margin-top:6px;
+  color:var(--muted);
+}
+.sign-camera-dialog {
+  margin:auto;
+  width:min(calc(100% - 24px), 600px);
+  max-height:90dvh;
+  padding:24px;
+  transform:none;
+}
+.sign-camera-dialog h2 {
+  padding-right:32px;
+}
+.sign-camera-dialog::backdrop {
+  background:rgb(0 0 0 / 50%);
+}
+.sign-camera-dialog video:not([hidden]) {
+  display:block;
+  width:100%;
+  aspect-ratio:4/3;
+  max-height:42dvh;
+  object-fit:contain;
+  margin-top:14px;
+  border-radius:12px;
+  background:var(--soft);
+  transform:scaleX(-1);
+}
+.sign-camera-dialog #sign-camera-status {
+  margin:12px 0;
+  font-weight:600;
+  color:var(--text);
+}
+.sign-camera-actions {
+  align-items:end;
+}
+.sign-camera-reference {
+  margin-top:14px;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+.sign-camera-reference summary {
+  cursor:pointer;
+  font-weight:600;
+}
+.sign-camera-reference .field {
+  max-width:160px;
+  margin:12px 0;
+}
+.sign-camera-reference img {
+  display:block;
+  width:min(100%, 320px);
+  height:auto;
+  border-radius:8px;
+  transform:scaleX(-1);
 }
 .learning-page .path-card {
   width:100%;
@@ -1750,7 +1842,38 @@ body {
 }
 .lesson-page .back-link {
   display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
   margin-top:12px;
+  padding:8px 16px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--panel);
+  color:var(--text);
+  font-weight:600;
+  transition:background-color var(--transition), border-color var(--transition), transform var(--transition);
+}
+.lesson-page .back-link:hover,
+.lesson-page .back-link:focus-visible {
+  border-color:var(--primary);
+  background:var(--primary-light);
+  color:#102317;
+}
+.lesson-page .back-link:focus-visible {
+  outline:2px solid var(--primary);
+  outline-offset:3px;
+}
+.lesson-page .back-link:active {
+  border-color:var(--primary);
+  background:var(--primary);
+  color:#102317;
+  transform:scale(.98);
+}
+@media(prefers-reduced-motion:reduce) {
+  .lesson-page .back-link:active {
+    transform:none;
+  }
 }
 .lesson-page .stage-nav {
   display:grid;
@@ -1898,10 +2021,10 @@ body {
   margin:-6px 0 14px;
   color:var(--muted);
 }
-.progress-page .profile-grid {
+:is(.progress-page, .assessment-results) .profile-grid {
   gap:12px;
 }
-.progress-page .profile-card {
+:is(.progress-page, .assessment-results) .profile-card {
   display:grid;
   justify-items:start;
   align-content:start;
@@ -1910,9 +2033,61 @@ body {
   padding:clamp(12px, 2vw, 20px);
   text-align:left;
 }
-.progress-page .profile-card strong {
+:is(.progress-page, .assessment-results) .profile-card strong {
   font-size:1.5em;
   line-height:1.1;
+}
+.assessment-results .profile-grid {
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+}
+.assessment-results .profile-card {
+  gap:10px;
+  padding:clamp(14px, 2.4vw, 24px);
+}
+.assessment-results h2 {
+  font-size:1.125em;
+}
+#assessment-scores {
+  margin-bottom:12px;
+}
+.assessment-results .result-summary {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:clamp(12px, 2vw, 22px);
+  margin:20px 0 28px;
+  padding:clamp(16px, 3vw, 30px);
+  background:linear-gradient(120deg, color-mix(in srgb, var(--primary) 12%, var(--panel)), var(--panel));
+}
+.result-summary .icon-tile {
+  width:56px;
+  height:56px;
+  flex-shrink:0;
+}
+.result-summary-copy {
+  flex:1 1 180px;
+}
+.result-summary-copy h1 {
+  font:700 clamp(24px, 4vw, 36px)/1.15 Georgia, serif;
+}
+.result-summary-copy p {
+  margin-top:8px;
+  color:var(--muted);
+}
+@media(max-width:540px) {
+  .assessment-results .result-summary .btn {
+    width:100%;
+  }
+}
+@media(max-width:760px) {
+  .assessment-results .profile-grid {
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+@media(max-width:360px) {
+  .assessment-results .profile-grid {
+    grid-template-columns:1fr;
+  }
 }
 .history-list {
   list-style:none;
@@ -1965,9 +2140,23 @@ body {
 }
 .settings-fields {
   display:grid;
-  grid-template-columns:2fr 1fr;
+  grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);
   gap:16px;
-  margin-top:16px;
+  margin-top:20px;
+}
+.settings-fields .field {
+  gap:8px;
+  font-weight:600;
+}
+.settings-form-actions {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
 }
 .settings-account-row {
   display:flex;
@@ -1991,13 +2180,19 @@ body {
 [data-theme=dark] .settings-page .settings-reset {
   color:#fca5a5;
 }
-#settings-notice:not(:empty) {
-  margin-top:12px;
+.settings-form-actions #settings-notice:not(:empty) {
+  margin-inline-end:auto;
+}
+.settings-form-actions #settings-notice:empty {
+  width:0;
 }
 @media(max-width:540px) {
   .settings-fields {
     grid-template-columns:1fr;
-    gap:0;
+    gap:14px;
+  }
+  .settings-form-actions .btn {
+    width:100%;
   }
 }
 
@@ -2036,10 +2231,9 @@ body {
 .dictionary-image {
   display:block;
   width:100%;
-  height:clamp(120px, 16vw, 176px);
-  padding:8px;
-  object-fit:contain;
-  border-radius:12px;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  border-radius:15px;
   background:var(--soft)
 }
 .dictionary-detail-photo {
@@ -2089,16 +2283,11 @@ body {
   gap:14px;
   padding:22px
 }
-.youtube-lesson-art {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  min-height:75px;
-  padding:18px;
-  border-radius:15px;
-  background:var(--primary-light);
-  font-size:11px;
-  color:var(--primary)
+.youtube-lesson .home-video-thumbnail {
+  border-radius:15px
+}
+.youtube-lesson .home-video-topic {
+  font-size:11px
 }
 .youtube-lesson h3 {
   font-size:16px
