@@ -332,7 +332,7 @@ function renderHome() {
   const next = lessons.find(l => !state.mastered.includes(l.id));
   const action = !state.profile ? "showPage('login')" : !state.assessment ? "navigate('assessment')" : next ? "navigate('lesson', {id:'" + next.id + "'})" : "navigate('progress')";
   const cards = [
-    {title:'Kosakata',description:'Kenali kata, temukan maknanya.',image:'huruf.jpg',page:'dictionary'},
+    {title:'Kosakata',description:'Kenali kata, temukan maknanya.',image:'kosakata.jpg',page:'dictionary'},
     {title:'Cerita & bacaan',description:'Jelajahi cerita dan pengetahuan baru.',image:'sejarah.jpg',page:'learning'},
     {title:'Dunia hewan',description:'Belajar dari teman-teman di alam.',image:'hewan.jpg',page:'dictionary'},
     {title:'Belajar visual',description:'Pahami lewat gambar dan isyarat.',image:'belajar.jpg',page:'learning'},
@@ -565,7 +565,7 @@ function renderAssessment() {
     return '<div class="assessment-results"><header class="panel result-summary">' +
       '<div class="icon-tile green" aria-hidden="true">' + icon('trophy') + '</div>' +
       '<div class="result-summary-copy"><h1>Asesmen selesai</h1>' +
-      '<p>Hasilmu sudah tersimpan. Kamu bisa melanjutkan ke jalur belajar.</p></div>' +
+      '<p>Hasilmu sudah tersimpan, kamu bisa melanjutkan belajar.</p></div>' +
       '<a href="#" class="btn" onclick="navigate(\'learning\');return false">Lanjut belajar' + icon('arrow', 17) + '</a></header>' +
       '<section aria-labelledby="assessment-scores"><h2 id="assessment-scores">Hasil per aspek</h2>' +
       renderProfileGrid() + '</section></div>';
@@ -578,13 +578,13 @@ function renderAssessment() {
 
   // Intro
   return '<div class="assessment-start"><header class="page-heading"><div>' +
-    '<h1>Bukan ujian. Ini titik awalmu.</h1>' +
-    '<p>Jawab sesuai yang kamu pahami. Tidak perlu terburu-buru.</p></div></header>' +
+    '<h1>Ini titik awalmu.</h1>' +
+    '<p>Jawab sesuai yang kamu pahami & tidak perlu terburu-buru.</p></div></header>' +
     '<section class="panel assessment-intro" aria-labelledby="assessment-intro-title">' +
     '<div class="icon-tile green" aria-hidden="true">' + icon('clipboardList') + '</div>' +
     '<div class="assessment-intro-copy"><span class="tag neutral">Jenjang ' + grade + '</span>' +
     '<h2 id="assessment-intro-title">' + questions.length + ' soal, ' + aspects.length + ' aspek kemampuan</h2>' +
-    '<p>Kosakata, kalimat, bacaan, dan matematika dasar. Soal disesuaikan dengan jenjangmu.</p>' +
+    '<p>Kosakata, kalimat, bacaan, dan matematika dasar.</p>' +
     '<button class="btn" type="button" onclick="startAssessment()">Mulai asesmen' + icon('arrow', 17) + '</button>' +
     '</div></section></div>';
 }

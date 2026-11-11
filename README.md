@@ -124,3 +124,5 @@ Foto belajar bersama disimpan lokal di `images/belajar-bersama.jpg`, bersumber d
 Tema aktif kini `css/astro.css`, menggantikan tema Wander. Desain mengikuti referensi putih-hijau: judul Anton besar, navigasi horizontal, lima kartu foto menggantung dengan penjepit hijau dan garis lengkung. Di ponsel, kartu dapat digeser horizontal. Font dan foto disimpan lokal di `images/`. Pratinjau: `images/pratinjau-astro.png`.
 
 Foto: Unsplash (ID aset tercantum pada riwayat perubahan); font Anton dari Google Fonts, berlisensi SIL Open Font License.
+
+Foto kamus pada kartu Kosakata disimpan di `images/kosakata.jpg`, bersumber dari [Unsplash](https://images.unsplash.com/photo-1676302477502-fa8a634aaa8e).
