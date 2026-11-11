@@ -132,28 +132,22 @@
                   <input type="password" id="reg-confirm" placeholder="Ulangi kata sandi" required minlength="8" maxlength="128" autocomplete="new-password">
                 </div>
               </label>
-              <label class="soft-login-field">
-                <span>Daftar sebagai</span>
-                <div class="soft-input-wrap">
-                  <span class="field-icon"></span>
-                  <select id="reg-role">
-                    <option value="student">Siswa</option>
-                    <option value="teacher">Guru</option>
-                    <option value="parent">Orang tua</option>
-                  </select>
+              <fieldset class="register-roles">
+                <legend>Daftar sebagai</legend>
+                <div class="register-role-options">
+                  <label><input type="radio" name="reg-role" value="student" checked><span>Siswa</span></label>
+                  <label><input type="radio" name="reg-role" value="teacher"><span>Guru</span></label>
+                  <label><input type="radio" name="reg-role" value="parent"><span>Orang tua</span></label>
                 </div>
-              </label>
-              <label class="soft-login-field" id="reg-grade-field">
-                <span>Jenjang belajar</span>
-                <div class="soft-input-wrap">
-                  <span class="field-icon"></span>
-                  <select id="reg-grade" required>
-                    <option value="SD">SD</option>
-                    <option value="SMP">SMP</option>
-                    <option value="SMA">SMA</option>
-                  </select>
+              </fieldset>
+              <fieldset class="register-roles" id="reg-grade-field">
+                <legend>Jenjang belajar</legend>
+                <div class="register-role-options">
+                  <label><input type="radio" name="reg-grade" value="SD" checked><span>SD</span></label>
+                  <label><input type="radio" name="reg-grade" value="SMP"><span>SMP</span></label>
+                  <label><input type="radio" name="reg-grade" value="SMA"><span>SMA</span></label>
                 </div>
-              </label>
+              </fieldset>
               <p class="login-error" id="register-error" role="alert" style="display:none"></p>
               <button class="btn login-rounded-submit login-primary-action" type="submit">Daftar <span data-ui-icon="arrow"></span></button>
             </form>

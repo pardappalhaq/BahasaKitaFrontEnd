@@ -10,10 +10,22 @@ body{background:var(--bg);color:var(--text);overflow-x:clip}.app-shell{display:b
 @media(max-width:540px){.hanging-gallery{height:330px}.gallery-string{top:65px;height:65px}.hanging-track{padding-bottom:45px}}
 
 @media(max-width:800px) {
+  .sidebar {
+    position:sticky;
+    top:0;
+    overflow:visible;
+    background:var(--bg);
+  }
+  .topbar {
+    position:fixed;
+  }
   .sidebar.open #sidebar-nav {
-    top:calc(100% + 8px);
+    position:fixed;
+    top:93px;
     left:5%;
     right:5%;
+    max-height:calc(100dvh - 110px);
+    overflow-y:auto;
     gap:4px;
     padding:10px;
     border-radius:18px;
@@ -40,5 +52,16 @@ body{background:var(--bg);color:var(--text);overflow-x:clip}.app-shell{display:b
   .sidebar.open #sidebar-nav > a:focus-visible {
     outline:2px solid var(--primary);
     outline-offset:-2px;
+  }
+  .menu-backdrop {
+    position:fixed;
+    inset:0;
+    background:rgb(0 0 0 / 15%);
+  }
+}
+@media(max-width:540px) {
+  .sidebar.open #sidebar-nav {
+    top:87px;
+    max-height:calc(100dvh - 104px);
   }
 }

@@ -33,13 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 2000);
 
   // Register form role toggle
-  const roleSelect = document.getElementById('reg-role');
-  if (roleSelect) {
-    roleSelect.addEventListener('change', function () {
+  document.querySelectorAll('input[name="reg-role"]').forEach(function (roleInput) {
+    roleInput.addEventListener('change', function () {
       document.getElementById('reg-grade-field').style.display =
         this.value === 'student' ? '' : 'none';
     });
-  }
+  });
 
   // Login form
   document.getElementById('login-form').addEventListener('submit', handleLogin);
@@ -125,8 +124,8 @@ function handleRegister(e) {
   const email = document.getElementById('reg-email').value.trim();
   const password = document.getElementById('reg-password').value;
   const confirm = document.getElementById('reg-confirm').value;
-  const role = document.getElementById('reg-role').value;
-  const grade = document.getElementById('reg-grade').value;
+  const role = document.querySelector('input[name="reg-role"]:checked').value;
+  const grade = document.querySelector('input[name="reg-grade"]:checked').value;
   const errorEl = document.getElementById('register-error');
 
   if (!name) { errorEl.textContent = 'Isi nama panggilanmu.'; errorEl.style.display = ''; return; }
