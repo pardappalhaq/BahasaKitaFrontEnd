@@ -936,6 +936,10 @@ function renderProfile() {
     renderStatCard('clipboardList', 'blue', (state.assessment ? 'Sudah selesai' : 'Belum dimulai'), 'Asesmen awal') +
     renderStatCard('history', 'pink', lessonAttempts.length + ' sesi', 'Sesi belajar tercatat') +
     '</div></section>';
+  html += '<section class="panel settings-panel"><h2>Akun</h2>' +
+    '<div class="settings-account-row"><div><h3>Keluar dari akun</h3>' +
+    '<p>Kembali ke halaman masuk.</p></div>' +
+    '<button class="btn secondary" type="button" onclick="logout()">Keluar</button></div></section>';
   return html + '</div>';
 }
 
@@ -953,14 +957,7 @@ function renderSettings() {
     '<option value="SMP"' + (state.grade === 'SMP' ? ' selected' : '') + '>SMP</option>' +
     '<option value="SMA"' + (state.grade === 'SMA' ? ' selected' : '') + '>SMA</option></select></label></div>' +
     '<div class="settings-form-actions"><p id="settings-notice" role="status"></p>' +
-    '<button class="btn" type="submit">Simpan profil</button></div></form></section>' +
-    '<section class="panel settings-panel"><h2>Akun dan data</h2>' +
-    '<div class="settings-account-row"><div><h3>Keluar dari akun</h3>' +
-    '<p>Kembali ke halaman masuk.</p></div>' +
-    '<button class="btn secondary" type="button" onclick="logout()">Keluar</button></div>' +
-    '<div class="settings-account-row"><div><h3>Reset data belajar</h3>' +
-    '<p>Hapus hasil asesmen, kemajuan materi, dan riwayat belajar.</p></div>' +
-    '<button class="btn secondary settings-reset" type="button" onclick="resetAccount()">Reset data belajar</button></div></section></div>';
+    '<button class="btn" type="submit">Simpan profil</button></div></form></section></div>';
 }
 
 function saveProfile() {
@@ -975,16 +972,6 @@ function saveProfile() {
   notice.textContent = 'Profil tersimpan!';
   notice.style.display = '';
   setTimeout(function () { notice.style.display = 'none'; }, 3000);
-}
-
-function resetAccount() {
-  if (!confirm('Yakin ingin mereset semua data belajar? Tindakan ini tidak bisa dibatalkan.')) return;
-  state.assessment = null;
-  state.mastered = [];
-  state.attempts = [];
-  state.activeAssessment = null;
-  saveState();
-  navigate('home');
 }
 
 // ==================== MISSING PAGE ====================

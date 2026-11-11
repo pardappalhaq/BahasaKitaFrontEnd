@@ -2295,13 +2295,6 @@ body {
 .settings-account-row h3 {
   font-size:1em;
 }
-.settings-page .settings-reset {
-  border-color:#c24141;
-  color:#c24141;
-}
-[data-theme=dark] .settings-page .settings-reset {
-  color:#fca5a5;
-}
 .settings-form-actions #settings-notice:not(:empty) {
   margin-inline-end:auto;
 }
