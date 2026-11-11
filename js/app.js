@@ -32,14 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, 2000);
 
-  // Register form role toggle
-  document.querySelectorAll('input[name="reg-role"]').forEach(function (roleInput) {
-    roleInput.addEventListener('change', function () {
-      document.getElementById('reg-grade-field').style.display =
-        this.value === 'student' ? '' : 'none';
-    });
-  });
-
   // Login form
   document.getElementById('login-form').addEventListener('submit', handleLogin);
   document.getElementById('register-form').addEventListener('submit', handleRegister);
@@ -124,7 +116,6 @@ function handleRegister(e) {
   const email = document.getElementById('reg-email').value.trim();
   const password = document.getElementById('reg-password').value;
   const confirm = document.getElementById('reg-confirm').value;
-  const role = document.querySelector('input[name="reg-role"]:checked').value;
   const grade = document.querySelector('input[name="reg-grade"]:checked').value;
   const errorEl = document.getElementById('register-error');
 
@@ -136,8 +127,8 @@ function handleRegister(e) {
     name: displayName(name),
     email: email.toLowerCase(),
     password: password,
-    role: role,
-    grade: role === 'student' ? grade : null,
+    role: 'student',
+    grade: grade,
     goal: 'Mengenal kata',
   };
 
