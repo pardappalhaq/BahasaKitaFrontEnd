@@ -32,7 +32,7 @@
     <div class="splash-halo halo-two"></div>
     <div class="splash-center">
       <div class="splash-logo">
-        <div class="splash-logo-text">BahasaKita</div>
+        <span class="brand-logo-text">BahasaKita</span>
       </div>
       <p class="splash-tagline">Belajar dengan caramu. Bertumbuh bersama.</p>
       <div class="splash-loading" role="status" aria-label="Menyiapkan beranda">
@@ -54,7 +54,7 @@
       <main class="auth-content">
         <div class="login-center">
           <section class="login-reference-card login-soft-card" aria-labelledby="login-heading">
-            <div class="splash-logo-text login-card-logo">BahasaKita</div>
+            <div class="login-card-logo"><span class="brand-logo-text">BahasaKita</span></div>
             <h1 id="login-heading" tabindex="-1">Selamat datang kembali</h1>
             <p class="login-card-description">Masukkan email dan kata sandi untuk melanjutkan.</p>
             <form id="login-form">
@@ -99,7 +99,7 @@
       <main class="auth-content">
         <div class="login-center">
           <section class="login-reference-card login-soft-card register-soft-card" aria-labelledby="register-heading">
-            <div class="splash-logo-text login-card-logo">BahasaKita</div>
+            <div class="login-card-logo"><span class="brand-logo-text">BahasaKita</span></div>
             <h1 id="register-heading" tabindex="-1">Mari kenalan dulu</h1>
             <p class="login-card-description">Pilih peran akunmu. Siswa belajar mandiri, guru dan orang tua mendampingi.</p>
             <form id="register-form">
@@ -197,9 +197,6 @@
     <div class="app-body">
       <!-- Top bar -->
       <header class="topbar">
-        <button type="button" class="mobile-menu" aria-label="Buka menu" onclick="toggleSidebar()">
-          <span id="menu-icon"></span>
-        </button>
         <a class="mobile-brand" href="#" onclick="navigate('home');return false" aria-label="BahasaKita, beranda">
           <span class="mobile-brand-text">BahasaKita</span>
         </a>
@@ -216,6 +213,9 @@
             <span id="topbar-avatar-text"></span>
           </button>
         </div>
+        <button type="button" class="mobile-menu" aria-label="Buka menu" aria-expanded="false" aria-controls="sidebar-nav" onclick="toggleSidebar()">
+          <span id="menu-icon"></span>
+        </button>
       </header>
 
       <!-- Main content area -->

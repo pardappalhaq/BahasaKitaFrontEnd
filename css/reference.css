@@ -821,6 +821,10 @@ button,a,input,select {
   margin-bottom:23px;
   color:var(--primary)
 }
+.login-card-logo > .brand-logo-text,
+.splash-logo > .brand-logo-text {
+  display:inline-block;
+}
 .login-soft-card h1 {
   font-size:25px;
   letter-spacing:-1px
@@ -993,7 +997,7 @@ button,a,input,select {
   margin:20px 0 30px
 }
 .page-heading h1 {
-  font:700 37px Georgia,serif;
+  font:700 37px/1.2 var(--font);
   letter-spacing:-1px
 }
 .page-heading p {
@@ -2117,7 +2121,7 @@ body {
   flex:1 1 180px;
 }
 .result-summary-copy h1 {
-  font:700 clamp(24px, 4vw, 36px)/1.15 Georgia, serif;
+  font:700 clamp(24px, 4vw, 36px)/1.2 var(--font);
 }
 .result-summary-copy p {
   margin-top:8px;

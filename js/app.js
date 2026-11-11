@@ -215,7 +215,7 @@ function buildNavigation() {
     { id: 'home', icon: 'home', label: 'Beranda' },
     { id: 'learning', icon: 'graduation', label: 'Belajar' },
     { id: 'dictionary', icon: 'dictionary', label: 'Kamus visual' },
-    { id: 'progress', icon: 'chart', label: 'Kemajuan saya' },
+    { id: 'profile', icon: 'tablerUser', label: 'Profil saya' },
   ];
 
   // Sidebar nav
@@ -252,6 +252,9 @@ function toggleSidebar() {
   const sidebar = document.getElementById('primary-sidebar');
   state.sidebarOpen = !state.sidebarOpen;
   sidebar.classList.toggle('open', state.sidebarOpen);
+  const menuButton = document.querySelector('.mobile-menu');
+  menuButton.setAttribute('aria-expanded', String(state.sidebarOpen));
+  menuButton.setAttribute('aria-label', state.sidebarOpen ? 'Tutup menu' : 'Buka menu');
   if (state.sidebarOpen) {
     const backdrop = document.createElement('div');
     backdrop.className = 'menu-backdrop';
